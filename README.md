@@ -24,23 +24,26 @@ cd Legal-Chatbot-IPC
 
 2. Create Virtual Environment
 
-python -m venv venv
+-- python -m venv venv
 
 3. Activate Virtual Environment
 # Windows
-.\venv\Scripts\activate
+-- .\venv\Scripts\activate
 
 
 4. Install Dependencies
-pip install -r requirements.txt
+
+-- pip install -r requirements.txt
 
 
 Or manually:
-pip install langchain langchain-community pypdfloader langchain-text-splitters sentence-transformers faiss-cpu flask openai
+
+-- pip install langchain langchain-community pypdfloader langchain-text-splitters sentence-transformers faiss-cpu flask openai
 
 
 5. Initialize Vector Store
-python back.py
+
+-- python back.py
 
 
 This creates the ipc_index/ folder containing the FAISS vector store.
@@ -57,7 +60,8 @@ client = OpenAI(api_key="your-openai-key")
 
 
 ▶️ Run the Application
-python app.py
+
+-- python app.py
 
 
 Then open http://localhost:5000 in your browser.
@@ -90,14 +94,6 @@ Legal-Chatbot-IPC/
 - To modify the legal corpus: Replace or update PDFs processed by back.py
 - To switch LLMs: Adjust the model name in LM Studio or OpenAI client
 
-📸 Screenshots
-| Query Interface | Response Example | 
-| Query | Response | 
-
-
-
-📜 License
-This project is licensed under the MIT License.
 
 
 
