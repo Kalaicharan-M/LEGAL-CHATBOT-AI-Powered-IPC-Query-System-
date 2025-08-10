@@ -80,6 +80,16 @@ Then open [http://localhost:5000](http://localhost:5000) in your browser.
 
 ---
 
+## 📷 Screenshots
+
+**Question Page**  
+![Question Page](https://github.com/Kalaicharan-M/LEGAL-CHATBOT-AI-Powered-IPC-Query-System-/blob/main/project%20images/Screenshot%202025-08-09%20161623.png?raw=true)
+
+**Answer Page**  
+![Answer Page](https://github.com/Kalaicharan-M/LEGAL-CHATBOT-AI-Powered-IPC-Query-System-/blob/main/project%20images/Screenshot%202025-08-09%20161651.png?raw=true)
+
+---
+
 ## 📁 Project Structure
 ```
 Legal-Chatbot-IPC/
