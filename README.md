@@ -1,15 +1,14 @@
-# 🧠 Legal Chatbot (IPC Query Assistant)
+# 🏥 Intelligent Medical Q&A Chatbot (RAG + LangChain)
 
-An AI-powered chatbot that answers legal questions about Indian Penal Code (IPC) sections using local or cloud-based LLMs (LM Studio or OpenAI) and semantic search via FAISS.
+An AI-powered chatbot that answers **medical questions** using **Retrieval-Augmented Generation (RAG)** with **LangChain**, **FAISS semantic search**, and integrates with both **LM Studio (local)** and **OpenAI (cloud)**. It retrieves information from trusted medical sources like **WHO, NHS, CDC, MedlinePlus, and Mayo Clinic** to provide reliable and context-aware responses.
 
 ---
 
 ## 🚀 Features
-
-- 🔍 **FAISS Vector Search** – Retrieves relevant IPC sections using embeddings  
-- 🤖 **Hybrid LLM Integration** – Supports both LM Studio (local) and OpenAI (cloud)  
-- 🛠️ **Flask Backend** – Robust API for query processing  
-- 🎨 **Responsive UI** – Clean HTML/CSS frontend  
+- 🔍 **FAISS Vector Search** – Retrieves relevant medical information from indexed sources  
+- 🤖 **Hybrid LLM Integration** – Works with LM Studio locally or OpenAI in the cloud  
+- 🛠️ **Flask Backend** – Lightweight API for query handling  
+- 🎨 **Frontend UI** – Simple HTML/CSS interface for asking medical questions  
 
 ---
 
@@ -17,101 +16,122 @@ An AI-powered chatbot that answers legal questions about Indian Penal Code (IPC)
 
 ### 1. Extract Project Files
 ```bash
-unzip Legal-Chatbot-IPC.zip
-cd Legal-Chatbot-IPC
-```
-
-### 2. Create Virtual Environment
-```bash
+unzip Medical-Chatbot-RAG.zip
+cd Medical-Chatbot-RAG
+2. Create Virtual Environment
+bash
+Copy
+Edit
 python -m venv venv
-```
-
-### 3. Activate Virtual Environment
-```bash
+3. Activate Virtual Environment
+bash
+Copy
+Edit
 # Windows
 .\venv\Scripts\activate
-```
 
-### 4. Install Dependencies
-```bash
+# macOS/Linux
+source venv/bin/activate
+4. Install Dependencies
+bash
+Copy
+Edit
 pip install -r requirements.txt
-```
 Or manually:
-```bash
-pip install langchain langchain-community pypdfloader langchain-text-splitters sentence-transformers faiss-cpu flask openai
-```
 
-### 5. Initialize Vector Store
-```bash
+bash
+Copy
+Edit
+pip install langchain langchain-community faiss-cpu sentence-transformers unstructured requests beautifulsoup4 flask openai
+5. Initialize Vector Store
+bash
+Copy
+Edit
 python back.py
-```
-This creates the `ipc_index/` folder containing the FAISS vector store.
+This creates the medical_index/ folder containing the FAISS vector store.
 
----
+⚙️ Configure LLM (Choose One)
+🔹 Option A: LM Studio (Local)
+Download and run LM Studio
 
-## ⚙️ Configure LLM (Choose One)
+Load your preferred LLM model (e.g., LLaMA-3 8B Instruct)
 
-**Option A: LM Studio (Local)**  
-- Download and run LM Studio  
-- Load your preferred LLM model  
-- Start the local inference server (default: `http://127.0.0.1:1234`)  
+Start the local inference server (default: http://127.0.0.1:1234)
 
-**Option B: OpenAI (Cloud)**  
-- Replace the OpenAI client code in `app.py` with:
-```python
-client = OpenAI(api_key="your-openai-key")
-```
+python
+Copy
+Edit
+from langchain_community.llms import OpenAI
+llm = OpenAI(model="local-model", base_url="http://127.0.0.1:1234", temperature=0)
+🔹 Option B: OpenAI (Cloud)
+Replace in app.py:
 
----
+python
+Copy
+Edit
+from langchain_openai import ChatOpenAI
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+Set your API key:
 
-## ▶️ Run the Application
-```bash
+bash
+Copy
+Edit
+# macOS/Linux
+export OPENAI_API_KEY="your_api_key_here"
+
+# Windows PowerShell
+setx OPENAI_API_KEY "your_api_key_here"
+▶️ Run the Application
+bash
+Copy
+Edit
 python app.py
-```
-Then open [http://localhost:5000](http://localhost:5000) in your browser.
+Then open: http://localhost:5000 in your browser.
 
----
+💬 Usage
+Enter a medical question (e.g., "What are the early symptoms of diabetes?")
 
-## 💬 Usage
-- Enter your legal question (e.g., *"What is the IPC section for theft?"*)  
-- Submit to receive an answer with relevant IPC sections  
-- Example output:  
-  *"Theft is punishable under IPC Section 378."*
+The system retrieves relevant documents and generates a context-based answer
 
----
+Example Output:
+"Common early symptoms of diabetes include frequent urination, increased thirst, and fatigue (WHO, NHS)."
 
-## 📷 Screenshots
+📷 Screenshots
+Homepage
 
-**Question Page**  
-![Question Page](https://github.com/Kalaicharan-M/LEGAL-CHATBOT-AI-Powered-IPC-Query-System-/blob/main/project%20images/Screenshot%202025-08-09%20161623.png?raw=true)
+Answer Page
 
-**Answer Page**  
-![Answer Page](https://github.com/Kalaicharan-M/LEGAL-CHATBOT-AI-Powered-IPC-Query-System-/blob/main/project%20images/Screenshot%202025-08-09%20161651.png?raw=true)
-
----
-
-## 📁 Project Structure
-```
-Legal-Chatbot-IPC/
-├── app.py              # Main Flask application
+📁 Project Structure
+graphql
+Copy
+Edit
+Medical-Chatbot-RAG/
+├── app.py              # Flask application
 ├── back.py             # FAISS vector store initialization
 ├── templates/
 │   ├── index.html      # Homepage UI
-│   └── sec.html        # Answer display UI
-├── ipc_index/          # FAISS vector store (auto-generated)
+│   └── answer.html     # Answer display UI
+├── medical_index/      # FAISS vector store (auto-generated)
 ├── requirements.txt    # Dependencies
 └── README.md           # This file
-```
+🧩 Troubleshooting
+FAISS Errors → Use Python 3.8+ with compatible faiss-cpu
 
----
+LM Studio Issues → Ensure local inference server is running at http://127.0.0.1:1234
 
-## 🧩 Troubleshooting
-- **FAISS Errors** – Use Python 3.8+ and compatible `faiss-cpu`  
-- **LM Studio Issues** – Ensure local server is running at `http://127.0.0.1:1234`  
-- **OpenAI Errors** – Check your API key and internet connection  
+OpenAI Errors → Verify API key and internet connection
 
----
+🌟 Future Work
+🎤 Voice Support – Add speech-to-text & text-to-speech
 
-## 🛠️ Customization
-- **Modify Legal Corpus** – Replace or update PDFs processed by `back.py`  
-- **Switch LLMs** – Adjust the model name in LM Studio or OpenAI client  
+🌍 Multilingual Queries – Support multiple languages
+
+📊 ICD-11/SNOMED Mapping – Map symptoms to medical codes
+
+📰 Real-Time Health Updates – Fetch live health news
+
+🧠 Advanced Symptom Checker – Interactive diagnostic assistance
+
+📌 Example Query
+User: "What are the signs of a heart attack?"
+Bot: "Signs include chest pain or pressure, shortness of breath, nausea, and lightheadedness (WHO, Mayo Clinic, NHS)."
