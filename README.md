@@ -1,4 +1,4 @@
-# 🏥 Intelligent Medical Q&A Chatbot (RAG + LangChain)
+# 🏥 Intelligent IPC Q&A Chatbot (RAG + LangChain)
 
 
 
